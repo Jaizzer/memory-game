@@ -60,6 +60,7 @@ export default function App() {
     // Render cards
     return (
         <>  
+            { currentScore === characters.length ? <div className='victory-notification'>You Won</div> : null}
             <div className='scoreboard'>
                 <div className='current-score'>Current Score: {currentScore}</div>
                 <div className='best-score'>Best Score: {bestScore}</div>
