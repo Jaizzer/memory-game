@@ -2,30 +2,37 @@ import { useEffect, useState } from 'react';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
-    const [gameOver, setGameOver] = useState(false);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0)
 
     function handleClick(id) {
         const updatedCharacterClickCount = characters.map((character) => {
             if (character.id === id) {
-                // Character was clicked before
-                if (character.clickCount === 1) {
-                    setGameOver(true)
-                }
                 return { ...character, clickCount: character.clickCount + 1 };
             }
             return character;
         });
 
-        // Update scores
-        const nextScore = currentScore + 1;
-        setCurrentScore(nextScore);
-        if (nextScore > bestScore) {
-            setBestScore(nextScore);
-        }
+        const cardWasClickedTwice = updatedCharacterClickCount.find(character => character.clickCount === 2) ? true : false;
+        if (!cardWasClickedTwice) {
+            // Update scores
+            const nextScore = currentScore + 1;
+            setCurrentScore(nextScore);
+            if (nextScore > bestScore) {
+                setBestScore(nextScore);
+            }
+            
+            // Update click counts
+            setCharacters(updatedCharacterClickCount);
+        } else {
+            // Reset click counts
+            setCharacters(characters.map(character => {
+                return {...character, clickCount: 0}
+            }));
 
-        setCharacters(updatedCharacterClickCount);
+            // Reset score
+            setCurrentScore(0);
+        }
     }
 
     // Retrieve Rick and Morty API
@@ -48,15 +55,6 @@ export default function App() {
                 console.error('Error: ', error);
             });
     }, []);
-
-    // Render game over screen
-    if (gameOver) {
-        return (
-            <div className='game-over'>
-                You Lost!!!
-            </div>
-        )
-    }
 
     // Render cards
     return (
