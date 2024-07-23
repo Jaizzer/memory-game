@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+    const [characters, setCharacters] = useState([]);
+
     // Retrieve demon slayer API
     useEffect(() => {
         fetch('https://demon-slayer-api.onrender.com/v1/').then(response => {
@@ -9,7 +11,7 @@ export default function App() {
             }
             return response.json()
         }).then(data => {
-            console.log(data);
+            setCharacters(data.map(character=> {return {...character, clickCount: 0}}));
         }).catch(error => {
             console.error('Error: ', error);
         });
