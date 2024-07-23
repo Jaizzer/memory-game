@@ -8,6 +8,7 @@ export default function App() {
     function handleClick(id) {
         const updatedCharacterClickCount = characters.map((character) => {
             if (character.id === id) {
+                // Character was clicked before
                 if (character.clickCount === 1) {
                     setGameOver(true)
                 }
@@ -40,6 +41,7 @@ export default function App() {
             });
     }, []);
 
+    // Render game over screen
     if (gameOver) {
         return (
             <div className='game-over'>
@@ -48,6 +50,7 @@ export default function App() {
         )
     }
 
+    // Render cards
     return (
         <>
             {characters.map((character) => {
