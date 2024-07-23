@@ -14,9 +14,9 @@ export default function App() {
         setCharacters(updatedClickCount);
     }
 
-    // Retrieve demon slayer API
+    // Retrieve Rick and Morty API
     useEffect(() => {
-        fetch('https://demon-slayer-api.onrender.com/v1/')
+        fetch("https://rickandmortyapi.com/api/character")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -25,7 +25,7 @@ export default function App() {
             })
             .then((data) => {
                 setCharacters(
-                    data.map((character) => {
+                    data.results.map((character) => {
                         return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
                     })
                 );
