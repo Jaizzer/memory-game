@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 export default function App() {
     const [characters, setCharacters] = useState([]);
     const [gameOver, setGameOver] = useState(false);
-    
+    const [currentScore, setCurrentScore] = useState(0);
+    const [bestScore, setBestScore] = useState(0)
 
     function handleClick(id) {
         const updatedCharacterClickCount = characters.map((character) => {
@@ -16,6 +17,13 @@ export default function App() {
             }
             return character;
         });
+
+        // Update scores
+        const nextScore = currentScore + 1;
+        setCurrentScore(nextScore);
+        if (nextScore > bestScore) {
+            setBestScore(nextScore);
+        }
 
         setCharacters(updatedCharacterClickCount);
     }
@@ -52,7 +60,11 @@ export default function App() {
 
     // Render cards
     return (
-        <>
+        <>  
+            <div className='scoreboard'>
+                <div className='current-score'>Current Score: {currentScore}</div>
+                <div className='best-score'>Best Score: {bestScore}</div>
+            </div>
             {characters.map((character) => {
                 return (
                     <div
