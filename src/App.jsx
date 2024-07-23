@@ -46,10 +46,10 @@ export default function App() {
                 return response.json();
             })
             .then((data) => {
-                setCharacters(
+                setCharacters(randomizeArray(
                     data.results.map((character) => {
                         return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
-                    })
+                    }))
                 );
             })
             .catch((error) => {
