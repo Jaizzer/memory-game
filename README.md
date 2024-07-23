@@ -1,1 +1,2 @@
-# memory-game
+# Memory Game
+Test your memory!
