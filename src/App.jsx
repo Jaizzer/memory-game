@@ -5,6 +5,7 @@ export default function App() {
     const [characters, setCharacters] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0)
+    const [cardCount, setCardCount] = useState(null);
 
     function handleClick(id) {
         const updatedCharacterClickCount = characters.map((character) => {
@@ -49,39 +50,62 @@ export default function App() {
                 setCharacters(randomizeArray(
                     data.results.map((character) => {
                         return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
-                    })).slice(0, 10)
+                    })).slice(0, cardCount)
                 );
             })
             .catch((error) => {
                 console.error('Error: ', error);
             });
-    }, []);
+    }, [cardCount]);
+
+    function handleChange(event) {
+        const difficulty = event.target.value;
+        if (difficulty === 'easy') {
+            setCardCount(10);
+        } else if (difficulty === 'medium') {
+            setCardCount(15);
+        } else {
+            setCardCount(20);
+        }
+    }
 
     // Render cards
     return (
         <>  
-            { currentScore === characters.length ? <div className='victory-notification'>You Won</div> : null}
-            <div className='scoreboard'>
-                <div className='current-score'>Current Score: {currentScore}</div>
-                <div className='best-score'>Best Score: {bestScore}</div>
-            </div>
-            <div className="deck">
-                {characters.map((character) => {
-                    return (
-                        <div
-                            className="card"
-                            key={character.id}
-                            onClick={() => {
-                                handleClick(character.id);
-                            }}
-                        >
-                            <div className="name">{character.name}</div>
-                            <img src={character.image} />
-                            <div className='clickCount'>Click Count: {character.clickCount}</div>
-                        </div>
-                    );
-                })}
-            </div>
+            <label htmlFor="difficulty">Choose Difficulty</label>
+            <select id="difficulty" onChange={handleChange}>
+                <option value="difficulty" selected disabled>Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            {cardCount && 
+                <>
+                    { currentScore === characters.length ? <div className='victory-notification'>You Won</div> : null}
+                    <div className='scoreboard'>
+                        <div className='current-score'>Current Score: {currentScore}</div>
+                        <div className='best-score'>Best Score: {bestScore}</div>
+                    </div>
+                    <div className="deck">
+                        {characters.map((character) => {
+                            return (
+                                <div
+                                    className="card"
+                                    key={character.id}
+                                    onClick={() => {
+                                        handleClick(character.id);
+                                    }}
+                                >
+                                    <div className="name">{character.name}</div>
+                                    <img src={character.image} />
+                                    {/* <div className='clickCount'>Click Count: {character.clickCount}</div> */}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </>
+            }
         </>
     );
 }
