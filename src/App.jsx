@@ -6,7 +6,7 @@ export default function App() {
     
 
     function handleClick(id) {
-        const updatedClickCount = characters.map((character) => {
+        const updatedCharacterClickCount = characters.map((character) => {
             if (character.id === id) {
                 if (character.clickCount === 1) {
                     setGameOver(true)
@@ -16,7 +16,7 @@ export default function App() {
             return character;
         });
 
-        setCharacters(updatedClickCount);
+        setCharacters(updatedCharacterClickCount);
     }
 
     // Retrieve Rick and Morty API
