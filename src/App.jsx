@@ -15,7 +15,7 @@ export default function App() {
             .then((data) => {
                 setCharacters(
                     data.map((character) => {
-                        return { ...character, clickCount: 0 };
+                        return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
                     })
                 );
             })
