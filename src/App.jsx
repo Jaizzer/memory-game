@@ -48,6 +48,7 @@ export default function App() {
                     >
                         <div className="name">{character.name}</div>
                         <img src={character.image} />
+                        <div className='clickCount'>Click Count: {character.clickCount}</div>
                     </div>
                 );
             })}
