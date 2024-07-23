@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import randomizeArray from '@chriscodesthings/randomize-array';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
@@ -22,8 +23,8 @@ export default function App() {
                 setBestScore(nextScore);
             }
             
-            // Update click counts
-            setCharacters(updatedCharacterClickCount);
+            // Randomize updated click counts
+            setCharacters(randomizeArray(updatedCharacterClickCount));
         } else {
             // Reset click counts
             setCharacters(characters.map(character => {
