@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
+    const [gameOver, setGameOver] = useState(false);
+    
 
     function handleClick(id) {
         const updatedClickCount = characters.map((character) => {
             if (character.id === id) {
+                if (character.clickCount === 1) {
+                    setGameOver(true)
+                }
                 return { ...character, clickCount: character.clickCount + 1 };
             }
             return character;
@@ -34,6 +39,14 @@ export default function App() {
                 console.error('Error: ', error);
             });
     }, []);
+
+    if (gameOver) {
+        return (
+            <div className='game-over'>
+                You Lost!!!
+            </div>
+        )
+    }
 
     return (
         <>
