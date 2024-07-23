@@ -64,21 +64,23 @@ export default function App() {
                 <div className='current-score'>Current Score: {currentScore}</div>
                 <div className='best-score'>Best Score: {bestScore}</div>
             </div>
-            {characters.map((character) => {
-                return (
-                    <div
-                        className="card"
-                        key={character.id}
-                        onClick={() => {
-                            handleClick(character.id);
-                        }}
-                    >
-                        <div className="name">{character.name}</div>
-                        <img src={character.image} />
-                        <div className='clickCount'>Click Count: {character.clickCount}</div>
-                    </div>
-                );
-            })}
+            <div className="deck">
+                {characters.map((character) => {
+                    return (
+                        <div
+                            className="card"
+                            key={character.id}
+                            onClick={() => {
+                                handleClick(character.id);
+                            }}
+                        >
+                            <div className="name">{character.name}</div>
+                            <img src={character.image} />
+                            <div className='clickCount'>Click Count: {character.clickCount}</div>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 }
