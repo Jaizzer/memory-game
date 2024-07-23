@@ -3,6 +3,17 @@ import { useEffect, useState } from 'react';
 export default function App() {
     const [characters, setCharacters] = useState([]);
 
+    function handleClick(id) {
+        const updatedClickCount = characters.map((character) => {
+            if (character.id === id) {
+                return { ...character, clickCount: character.clickCount + 1 };
+            }
+            return character;
+        });
+
+        setCharacters(updatedClickCount);
+    }
+
     // Retrieve demon slayer API
     useEffect(() => {
         fetch('https://demon-slayer-api.onrender.com/v1/')
@@ -23,5 +34,23 @@ export default function App() {
                 console.error('Error: ', error);
             });
     }, []);
-    return <></>;
+
+    return (
+        <>
+            {characters.map((character) => {
+                return (
+                    <div
+                        className="card"
+                        key={character.id}
+                        onClick={() => {
+                            handleClick(character.id);
+                        }}
+                    >
+                        <div className="name">{character.name}</div>
+                        <img src={character.image} />
+                    </div>
+                );
+            })}
+        </>
+    );
 }
