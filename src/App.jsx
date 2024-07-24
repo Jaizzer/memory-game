@@ -58,8 +58,9 @@ export default function App() {
             });
     }, [cardCount]);
 
-    function handleChange(event) {
-        const difficulty = event.target.value;
+    function handleDifficulty(event) {
+        const difficulty = event.target.id;
+        console.log(difficulty);
         if (difficulty === 'easy') {
             setCardCount(10);
         } else if (difficulty === 'medium') {
@@ -71,14 +72,13 @@ export default function App() {
 
     // Render cards
     return (
-        <>  
-            <label htmlFor="difficulty">Choose Difficulty</label>
-            <select id="difficulty" onChange={handleChange}>
-                <option value="difficulty" selected disabled>Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+        <>      
+            <div className='difficulty-selection'>
+                <div className='prompt-headline'>Choose Difficulty</div>
+                <div onClick={handleDifficulty} className='difficulty-option' id='easy'>Easy</div>
+                <div onClick={handleDifficulty} className='difficulty-option' id='medium'>Medium</div>
+                <div onClick={handleDifficulty} className='difficulty-option' id='hard'>Hard</div>
+            </div>
 
             {cardCount && 
                 <>
