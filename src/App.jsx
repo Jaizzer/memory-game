@@ -8,7 +8,7 @@ export default function App() {
     const [cardCount, setCardCount] = useState(null);
 
     function handleClick(id) {
-        const updatedCharacterClickCount = characters.map((character) => {
+        let updatedCharacterClickCount = characters.map((character) => {
             if (character.id === id) {
                 return { ...character, clickCount: character.clickCount + 1 };
             }
@@ -25,9 +25,9 @@ export default function App() {
             }
         } else {
             // Reset click counts
-            setCharacters(characters.map(character => {
+            updatedCharacterClickCount = characters.map(character => {
                 return {...character, clickCount: 0}
-            }));
+            });
 
             // Reset score
             setCurrentScore(0);
