@@ -23,9 +23,6 @@ export default function App() {
             if (nextScore > bestScore) {
                 setBestScore(nextScore);
             }
-            
-            // Randomize updated click counts
-            setCharacters(randomizeArray(updatedCharacterClickCount));
         } else {
             // Reset click counts
             setCharacters(characters.map(character => {
@@ -35,6 +32,8 @@ export default function App() {
             // Reset score
             setCurrentScore(0);
         }
+        // Randomize updated click counts
+        setCharacters(randomizeArray(updatedCharacterClickCount));
     }
 
     // Retrieve Rick and Morty API
