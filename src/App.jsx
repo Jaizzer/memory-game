@@ -59,7 +59,6 @@ export default function App() {
 
     function handleDifficulty(event) {
         const difficulty = event.target.id;
-        console.log(difficulty);
         if (difficulty === 'easy') {
             setCardCount(10);
         } else if (difficulty === 'medium') {
