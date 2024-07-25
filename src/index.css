@@ -9,3 +9,23 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
+.difficulty-selection {
+    display: grid;
+    border: 1px solid black;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+    gap: 10px;
+}
+
+.prompt-headline {
+    grid-column: 1 / -1;
+}
+
+.difficulty-option {
+    border: 1px solid black;
+}
+
+.difficulty-option:hover {
+    background-color: aquamarine;
+}
