@@ -59,12 +59,18 @@ export default function App() {
 
     function handleDifficulty(event) {
         const difficulty = event.target.id;
-        if (difficulty === 'easy') {
-            setCardCount(10);
-        } else if (difficulty === 'medium') {
-            setCardCount(15);
-        } else {
-            setCardCount(20);
+        switch (difficulty) {
+            case 'easy':
+                setCardCount(10);
+                break;
+            case 'medium':
+                setCardCount(15);
+                break;
+            case 'hard':
+                setCardCount(20);
+                break;
+            default:
+                break;
         }
     }
 
