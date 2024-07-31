@@ -47,16 +47,16 @@ export default function App() {
                 return response.json();
             })
             .then((data) => {
-                setCharacters(randomizeArray(
+                setCharacters(
                     data.results.map((character) => {
                         return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
-                    })).slice(0, cardCount)
+                    })
                 );
             })
             .catch((error) => {
                 console.error('Error: ', error);
             });
-    }, [cardCount]);
+    }, []);
 
     function startGame(newCardCount) {
         // Remove menu once player chose a diffulty level
