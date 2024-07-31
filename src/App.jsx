@@ -3,35 +3,36 @@ import randomizeArray from '@chriscodesthings/randomize-array';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
+    const [selectedCharacters, setSelectedCharacters] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0)
     const [menuDisplay, setMenuDisplay] = useState(true);
 
     function handleClick(characterId) {
-        const characterAlreadyClicked = characters.find((character) => character.clickCount === 1 && character.id === characterId) ? true : false;
+        const characterAlreadyClicked = selectedCharacters.find((character) => character.clickCount === 1 && character.id === characterId) ? true : false;
     
         if (characterAlreadyClicked) {
             // Reset all cards' click counts
             const updatedCharacters = randomizeArray(
-                characters.map((character) => {
+                selectedCharacters.map((character) => {
                     return { ...character, clickCount: 0 };
                 })
             );
-            setCharacters(updatedCharacters);
+            setSelectedCharacters(updatedCharacters);
     
             // Reset current score
             setCurrentScore(0);
         } else {
             // Increment click count of the clicked card
             const updatedCharacters = randomizeArray(
-                characters.map((character) => {
+                selectedCharacters.map((character) => {
                     if (character.id === characterId) {
                         return { ...character, clickCount: character.clickCount + 1 };
                     }
                     return character;
                 })
             );
-            setCharacters(updatedCharacters);
+            setSelectedCharacters(updatedCharacters);
     
             // Increment current score
             let updatedCurrentScore = currentScore + 1;
@@ -68,9 +69,7 @@ export default function App() {
     function startGame(newCardCount) {
         // Remove menu once player chose a diffulty level
         setMenuDisplay(false)
-        
-        setCharacters(randomizeArray(characters).slice(0, newCardCount)
-        )
+        setSelectedCharacters(randomizeArray(characters).slice(0, newCardCount))
     }
 
     if (menuDisplay) {
@@ -90,13 +89,13 @@ export default function App() {
     // Render cards
     return (
         <>
-            { currentScore === characters.length ? <div className='victory-notification'>You Won</div> : null}
+            { currentScore === selectedCharacters.length ? <div className='victory-notification'>You Won</div> : null}
             <div className='scoreboard'>
                 <div className='current-score'>Current Score: {currentScore}</div>
                 <div className='best-score'>Best Score: {bestScore}</div>
             </div>
             <div className="deck">
-                {characters.map((character) => {
+                {selectedCharacters.map((character) => {
                     return (
                         <div
                             className="card"
