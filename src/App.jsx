@@ -7,33 +7,41 @@ export default function App() {
     const [bestScore, setBestScore] = useState(0)
     const [menuDisplay, setMenuDisplay] = useState(true);
 
-    function handleClick(id) {
-        let updatedCharacterClickCount = characters.map((character) => {
-            if (character.id === id) {
-                return { ...character, clickCount: character.clickCount + 1 };
-            }
-            return character;
-        });
-
-        const cardWasClickedTwice = updatedCharacterClickCount.find(character => character.clickCount === 2) ? true : false;
-        if (!cardWasClickedTwice) {
-            // Update scores
-            const nextScore = currentScore + 1;
-            setCurrentScore(nextScore);
-            if (nextScore > bestScore) {
-                setBestScore(nextScore);
-            }
-        } else {
-            // Reset click counts
-            updatedCharacterClickCount = characters.map(character => {
-                return {...character, clickCount: 0}
-            });
-
-            // Reset score
+    function handleClick(characterId) {
+        const characterAlreadyClicked = characters.find((character) => character.clickCount === 1 && character.id === characterId) ? true : false;
+    
+        if (characterAlreadyClicked) {
+            // Reset all cards' click counts
+            const updatedCharacters = randomizeArray(
+                characters.map((character) => {
+                    return { ...character, clickCount: 0 };
+                })
+            );
+            setCharacters(updatedCharacters);
+    
+            // Reset current score
             setCurrentScore(0);
+        } else {
+            // Increment click count of the clicked card
+            const updatedCharacters = randomizeArray(
+                characters.map((character) => {
+                    if (character.id === characterId) {
+                        return { ...character, clickCount: character.clickCount + 1 };
+                    }
+                    return character;
+                })
+            );
+            setCharacters(updatedCharacters);
+    
+            // Increment current score
+            let updatedCurrentScore = currentScore + 1;
+            setCurrentScore(updatedCurrentScore);
+    
+            // Update best score if beaten
+            if (updatedCurrentScore > bestScore) {
+                setBestScore(updatedCurrentScore);
+            }
         }
-        // Randomize updated click counts
-        setCharacters(randomizeArray(updatedCharacterClickCount));
     }
 
     // Retrieve Rick and Morty API
