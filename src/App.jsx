@@ -5,7 +5,6 @@ export default function App() {
     const [characters, setCharacters] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0)
-    const [cardCount, setCardCount] = useState(null);
     const [menuDisplay, setMenuDisplay] = useState(true);
 
     function handleClick(id) {
@@ -61,7 +60,12 @@ export default function App() {
     function startGame(newCardCount) {
         // Remove menu once player chose a diffulty level
         setMenuDisplay(false)
-        setCardCount(newCardCount)
+        
+        setCharacters(randomizeArray(
+            characters.map((character) => {
+                return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
+            })).slice(0, newCardCount)
+        )
     }
 
     if (menuDisplay) {
