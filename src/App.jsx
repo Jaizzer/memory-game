@@ -76,19 +76,22 @@ export default function App() {
     }
 
     if (menuDisplay) {
-        return <div></div>
+        return (
+            <div className='menu'>
+                <div className="logo"></div>
+                <div className='difficulty-selection'>
+                    <div className='prompt-headline'>Choose Difficulty</div>
+                    <div onClick={handleDifficulty} className='difficulty-option' id='easy'>Easy</div>
+                    <div onClick={handleDifficulty} className='difficulty-option' id='medium'>Medium</div>
+                    <div onClick={handleDifficulty} className='difficulty-option' id='hard'>Hard</div>
+                </div>
+            </div>
+        )
     }
 
     // Render cards
     return (
         <>      
-            <div className='difficulty-selection'>
-                <div className='prompt-headline'>Choose Difficulty</div>
-                <div onClick={handleDifficulty} className='difficulty-option' id='easy'>Easy</div>
-                <div onClick={handleDifficulty} className='difficulty-option' id='medium'>Medium</div>
-                <div onClick={handleDifficulty} className='difficulty-option' id='hard'>Hard</div>
-            </div>
-
             {cardCount && 
                 <>
                     { currentScore === characters.length ? <div className='victory-notification'>You Won</div> : null}
