@@ -38,7 +38,7 @@ export default function App() {
                     })
                 );
                 setSelectedCharacters(updatedCharacters);
-            } 
+            }
         }
     }
 
@@ -119,45 +119,49 @@ export default function App() {
             </div>
             <div className="play-area">
                 {selectedCharacters && currentScore === selectedCharacters.length ? (
-                    <div className="notification">
-                        <div className="message victory">You Won</div>
-                        <div
-                            className="action"
-                            onClick={() => {
-                                startGame(selectedCharacters.length);
-                            }}
-                        >
-                            Play Again
-                        </div>
-                        <div
-                            className="action"
-                            onClick={() => {
-                                setMenuDisplay(true);
-                            }}
-                        >
-                            Back to Menu
+                    <div className="notification-container">
+                        <div className="notification">
+                            <div className="message victory">You Won</div>
+                            <div
+                                className="action"
+                                onClick={() => {
+                                    startGame(selectedCharacters.length);
+                                }}
+                            >
+                                Play Again
+                            </div>
+                            <div
+                                className="action"
+                                onClick={() => {
+                                    setMenuDisplay(true);
+                                }}
+                            >
+                                Back to Menu
+                            </div>
                         </div>
                     </div>
                 ) : null}
 
                 {currentScore === 0 && bestScore !== 0 ? (
-                    <div className="notification">
-                        <div className="message defeat">You Lost</div>
-                        <div
-                            className="action"
-                            onClick={() => {
-                                startGame(selectedCharacters.length);
-                            }}
-                        >
-                            Play Again
-                        </div>
-                        <div
-                            className="action"
-                            onClick={() => {
-                                setMenuDisplay(true);
-                            }}
-                        >
-                            Back to Menu
+                    <div className="notification-container">
+                        <div className="notification">
+                            <div className="message defeat">You Lost</div>
+                            <div
+                                className="action"
+                                onClick={() => {
+                                    startGame(selectedCharacters.length);
+                                }}
+                            >
+                                Play Again
+                            </div>
+                            <div
+                                className="action"
+                                onClick={() => {
+                                    setMenuDisplay(true);
+                                }}
+                            >
+                                Back to Menu
+                            </div>
                         </div>
                     </div>
                 ) : null}
