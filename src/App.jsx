@@ -58,23 +58,10 @@ export default function App() {
             });
     }, [cardCount]);
 
-    function handleDifficulty(event) {
+    function startGame(newCardCount) {
         // Remove menu once player chose a diffulty level
         setMenuDisplay(false)
-        const difficulty = event.target.id;
-        switch (difficulty) {
-            case 'easy':
-                setCardCount(10);
-                break;
-            case 'medium':
-                setCardCount(15);
-                break;
-            case 'hard':
-                setCardCount(20);
-                break;
-            default:
-                break;
-        }
+        setCardCount(newCardCount)
     }
 
     if (menuDisplay) {
@@ -83,9 +70,9 @@ export default function App() {
                 <div className="logo"></div>
                 <div className='difficulty-selection'>
                     <div className='prompt-headline'>Choose Difficulty</div>
-                    <div onClick={handleDifficulty} className='difficulty-option' id='easy'>Easy</div>
-                    <div onClick={handleDifficulty} className='difficulty-option' id='medium'>Medium</div>
-                    <div onClick={handleDifficulty} className='difficulty-option' id='hard'>Hard</div>
+                    <div onClick={() => {startGame(10)}} className='difficulty-option'>Easy</div>
+                    <div onClick={() => {startGame(15)}} className='difficulty-option'>Medium</div>
+                    <div onClick={() => {startGame(20)}} className='difficulty-option'>Hard</div>
                 </div>
             </div>
         )
