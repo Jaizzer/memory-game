@@ -71,6 +71,8 @@ export default function App() {
     function startGame(newCardCount) {
         // Remove menu once player chose a diffulty level
         setMenuDisplay(false);
+
+        // Choose the chracters that will be used
         setSelectedCharacters(randomizeArray(characters).slice(0, newCardCount));
     }
 
