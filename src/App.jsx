@@ -116,7 +116,15 @@ export default function App() {
         <>
             <div onClick={()=>{setMenuDisplay(true)}} className='back-to-menu'>Memory Game</div>
             <div className='play-area'>
-                {currentScore === selectedCharacters.length ? <div className="victory-notification">You Won</div> : null}
+                { selectedCharacters && currentScore === selectedCharacters.length 
+                    ? 
+                        <div className="notification">
+                            <div className="message">You Won</div>
+                            <div className='action'onClick={() => {startGame(selectedCharacters.length)}}>Play Again</div>
+                            <div className='action'onClick={() => {setMenuDisplay(true)}}>Back to Menu</div>
+                        </div> 
+                    :   null
+                }
                 <div className="scoreboard">
                     <div className="current-score">Current Score: {currentScore}</div>
                     <div className="best-score">Best Score: {bestScore}</div>
