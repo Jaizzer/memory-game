@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import randomizeArray from '@chriscodesthings/randomize-array';
-import Menu from './Menu';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
@@ -77,7 +76,7 @@ export default function App() {
     }
 
     if (menuDisplay) {
-        return <Menu></Menu>
+        return <div></div>
     }
 
     // Render cards
