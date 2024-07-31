@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import randomizeArray from '@chriscodesthings/randomize-array';
+import Menu from './Menu';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0)
     const [cardCount, setCardCount] = useState(null);
+    const [menuDisplay, setMenuDisplay] = useState(true);
 
     function handleClick(id) {
         let updatedCharacterClickCount = characters.map((character) => {
@@ -72,6 +74,10 @@ export default function App() {
             default:
                 break;
         }
+    }
+
+    if (menuDisplay) {
+        return <Menu></Menu>
     }
 
     // Render cards
