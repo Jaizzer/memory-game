@@ -59,6 +59,8 @@ export default function App() {
     }, [cardCount]);
 
     function handleDifficulty(event) {
+        // Remove menu once player chose a diffulty level
+        setMenuDisplay(false)
         const difficulty = event.target.id;
         switch (difficulty) {
             case 'easy':
