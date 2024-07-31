@@ -14,28 +14,9 @@ export default function App() {
             : false;
 
         if (characterAlreadyClicked) {
-            // Reset all cards' click counts
-            const updatedCharacters = randomizeArray(
-                selectedCharacters.map((character) => {
-                    return { ...character, clickCount: 0 };
-                })
-            );
-            setSelectedCharacters(updatedCharacters);
-
             // Reset current score
             setCurrentScore(0);
         } else {
-            // Increment click count of the clicked card
-            const updatedCharacters = randomizeArray(
-                selectedCharacters.map((character) => {
-                    if (character.id === characterId) {
-                        return { ...character, clickCount: character.clickCount + 1 };
-                    }
-                    return character;
-                })
-            );
-            setSelectedCharacters(updatedCharacters);
-
             // Increment current score
             let updatedCurrentScore = currentScore + 1;
             setCurrentScore(updatedCurrentScore);
@@ -44,6 +25,20 @@ export default function App() {
             if (updatedCurrentScore > bestScore) {
                 setBestScore(updatedCurrentScore);
             }
+
+            const gameIsNotOver = updatedCurrentScore !== selectedCharacters.length;
+            if (gameIsNotOver) {
+                // Increment click count of the clicked card
+                const updatedCharacters = randomizeArray(
+                    selectedCharacters.map((character) => {
+                        if (character.id === characterId) {
+                            return { ...character, clickCount: character.clickCount + 1 };
+                        }
+                        return character;
+                    })
+                );
+                setSelectedCharacters(updatedCharacters);
+            } 
         }
     }
 
