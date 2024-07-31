@@ -114,27 +114,30 @@ export default function App() {
     // Render cards
     return (
         <>
-            {currentScore === selectedCharacters.length ? <div className="victory-notification">You Won</div> : null}
-            <div className="scoreboard">
-                <div className="current-score">Current Score: {currentScore}</div>
-                <div className="best-score">Best Score: {bestScore}</div>
-            </div>
-            <div className="deck">
-                {selectedCharacters.map((character) => {
-                    return (
-                        <div
-                            className="card"
-                            key={character.id}
-                            onClick={() => {
-                                handleClick(character.id);
-                            }}
-                        >
-                            <div className="name">{character.name}</div>
-                            <img src={character.image} />
-                            {/* <div className='clickCount'>Click Count: {character.clickCount}</div> */}
-                        </div>
-                    );
-                })}
+            <div onClick={()=>{setMenuDisplay(true)}} className='back-to-menu'>Memory Game</div>
+            <div className='play-area'>
+                {currentScore === selectedCharacters.length ? <div className="victory-notification">You Won</div> : null}
+                <div className="scoreboard">
+                    <div className="current-score">Current Score: {currentScore}</div>
+                    <div className="best-score">Best Score: {bestScore}</div>
+                </div>
+                <div className="deck">
+                    {selectedCharacters.map((character) => {
+                        return (
+                            <div
+                                className="card"
+                                key={character.id}
+                                onClick={() => {
+                                    handleClick(character.id);
+                                }}
+                            >
+                                <div className="name">{character.name}</div>
+                                <img src={character.image} />
+                                {/* <div className='clickCount'>Click Count: {character.clickCount}</div> */}
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </>
     );
