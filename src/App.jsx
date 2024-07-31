@@ -120,7 +120,7 @@ export default function App() {
             <div className="play-area">
                 {selectedCharacters && currentScore === selectedCharacters.length ? (
                     <div className="notification">
-                        <div className="message">You Won</div>
+                        <div className="message victory">You Won</div>
                         <div
                             className="action"
                             onClick={() => {
@@ -139,6 +139,29 @@ export default function App() {
                         </div>
                     </div>
                 ) : null}
+
+                {currentScore === 0 && bestScore !== 0 ? (
+                    <div className="notification">
+                        <div className="message defeat">You Lost</div>
+                        <div
+                            className="action"
+                            onClick={() => {
+                                startGame(selectedCharacters.length);
+                            }}
+                        >
+                            Play Again
+                        </div>
+                        <div
+                            className="action"
+                            onClick={() => {
+                                setMenuDisplay(true);
+                            }}
+                        >
+                            Back to Menu
+                        </div>
+                    </div>
+                ) : null}
+
                 <div className="scoreboard">
                     <div className="current-score">Current Score: {currentScore}</div>
                     <div className="best-score">Best Score: {bestScore}</div>
