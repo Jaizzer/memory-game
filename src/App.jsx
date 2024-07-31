@@ -69,10 +69,7 @@ export default function App() {
         // Remove menu once player chose a diffulty level
         setMenuDisplay(false)
         
-        setCharacters(randomizeArray(
-            characters.map((character) => {
-                return { ...character, clickCount: 0, id: Math.floor(Math.random() * 9999) };
-            })).slice(0, newCardCount)
+        setCharacters(randomizeArray(characters).slice(0, newCardCount)
         )
     }
 
