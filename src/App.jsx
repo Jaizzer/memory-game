@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import randomizeArray from '@chriscodesthings/randomize-array';
+import Card from './Card';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
@@ -157,17 +158,14 @@ export default function App() {
                 <div className="deck">
                     {selectedCharacters.map((character) => {
                         return (
-                            <div
-                                className="card"
+                            <Card
+                                name={character.name}
                                 key={character.id}
-                                onClick={() => {
+                                imageLink={character.image}
+                                onClickFunction={() => {
                                     handleClick(character.id);
                                 }}
-                            >
-                                <div className="name">{character.name}</div>
-                                <img src={character.image} />
-                                {/* <div className='clickCount'>Click Count: {character.clickCount}</div> */}
-                            </div>
+                            />
                         );
                     })}
                 </div>
