@@ -106,6 +106,37 @@ export default function App() {
         );
     }
 
+    // Create a game notification if the player lost or won
+    let gameNotification = null;
+    const playerWon = selectedCharacters && currentScore === selectedCharacters.length;
+    const playerLost = currentScore === 0 && bestScore !== 0;
+    const gameIsOver = playerWon || playerLost;
+    if (gameIsOver) {
+        gameNotification = (
+            <div className="notification-container">
+                <div className="notification">
+                    <div className="message defeat">{playerWon ? 'You Won!' : 'You Lost'}</div>
+                    <div
+                        className="action"
+                        onClick={() => {
+                            startGame(selectedCharacters.length);
+                        }}
+                    >
+                        Play Again
+                    </div>
+                    <div
+                        className="action"
+                        onClick={() => {
+                            setMenuDisplay(true);
+                        }}
+                    >
+                        Back to Menu
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     // Render cards
     return (
         <>
@@ -118,54 +149,7 @@ export default function App() {
                 Memory Game
             </div>
             <div className="play-area">
-                {selectedCharacters && currentScore === selectedCharacters.length ? (
-                    <div className="notification-container">
-                        <div className="notification">
-                            <div className="message victory">You Won</div>
-                            <div
-                                className="action"
-                                onClick={() => {
-                                    startGame(selectedCharacters.length);
-                                }}
-                            >
-                                Play Again
-                            </div>
-                            <div
-                                className="action"
-                                onClick={() => {
-                                    setMenuDisplay(true);
-                                }}
-                            >
-                                Back to Menu
-                            </div>
-                        </div>
-                    </div>
-                ) : null}
-
-                {currentScore === 0 && bestScore !== 0 ? (
-                    <div className="notification-container">
-                        <div className="notification">
-                            <div className="message defeat">You Lost</div>
-                            <div
-                                className="action"
-                                onClick={() => {
-                                    startGame(selectedCharacters.length);
-                                }}
-                            >
-                                Play Again
-                            </div>
-                            <div
-                                className="action"
-                                onClick={() => {
-                                    setMenuDisplay(true);
-                                }}
-                            >
-                                Back to Menu
-                            </div>
-                        </div>
-                    </div>
-                ) : null}
-
+                {gameNotification}
                 <div className="scoreboard">
                     <div className="current-score">Current Score: {currentScore}</div>
                     <div className="best-score">Best Score: {bestScore}</div>
