@@ -113,12 +113,11 @@ export default function App() {
     }
 
     // Create a game notification if the player lost or won
-    let gameNotification = null;
     const playerWon = selectedCharacters.every((character) => character.clickCount === 1);
     const playerLost = selectedCharacters.some((character) => character.clickCount === 2);
     const gameIsOver = playerWon || playerLost;
     if (gameIsOver) {
-        gameNotification = (
+        return (
             <div className="notification-container">
                 <div className="notification">
                     <div className="message defeat">{playerWon ? 'You Won!' : 'You Lost'}</div>
@@ -145,7 +144,6 @@ export default function App() {
                 Memory Game
             </div>
             <div className="play-area">
-                {gameNotification}
                 <Scoreboard currentScore={currentScore} bestScore={bestScore} />
                 <div className="deck">
                     {selectedCharacters.map((character) => {
