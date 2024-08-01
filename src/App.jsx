@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import randomizeArray from '@chriscodesthings/randomize-array';
 import Card from './Card';
+import Scoreboard from './Scoreboard';
 
 export default function App() {
     const [characters, setCharacters] = useState([]);
@@ -151,10 +152,7 @@ export default function App() {
             </div>
             <div className="play-area">
                 {gameNotification}
-                <div className="scoreboard">
-                    <div className="current-score">Current Score: {currentScore}</div>
-                    <div className="best-score">Best Score: {bestScore}</div>
-                </div>
+                <Scoreboard currentScore={currentScore} bestScore={bestScore}/>
                 <div className="deck">
                     {selectedCharacters.map((character) => {
                         return (
