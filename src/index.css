@@ -42,3 +42,14 @@
 .best-score {
     border: 1px solid black;
 }
+
+.play,
+.pause {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.music-icon {
+    width: 40px;
+}
