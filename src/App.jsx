@@ -27,21 +27,18 @@ export default function App() {
             if (updatedCurrentScore > bestScore) {
                 setBestScore(updatedCurrentScore);
             }
-
-            const gameIsNotOver = updatedCurrentScore !== selectedCharacters.length;
-            if (gameIsNotOver) {
-                // Increment click count of the clicked card
-                const updatedCharacters = randomizeArray(
-                    selectedCharacters.map((character) => {
-                        if (character.id === characterId) {
-                            return { ...character, clickCount: character.clickCount + 1 };
-                        }
-                        return character;
-                    })
-                );
-                setSelectedCharacters(updatedCharacters);
-            }
         }
+
+        // Increment click count of the clicked card
+        const updatedCharacters = randomizeArray(
+            selectedCharacters.map((character) => {
+                if (character.id === characterId) {
+                    return { ...character, clickCount: character.clickCount + 1 };
+                }
+                return character;
+            })
+        );
+        setSelectedCharacters(updatedCharacters);
     }
 
     // Retrieve Rick and Morty API
@@ -117,8 +114,8 @@ export default function App() {
 
     // Create a game notification if the player lost or won
     let gameNotification = null;
-    const playerWon = selectedCharacters && currentScore === selectedCharacters.length;
-    const playerLost = currentScore === 0 && bestScore !== 0;
+    const playerWon = selectedCharacters.every((character) => character.clickCount === 1);
+    const playerLost = selectedCharacters.some((character) => character.clickCount === 2);
     const gameIsOver = playerWon || playerLost;
     if (gameIsOver) {
         gameNotification = (
