@@ -73,6 +73,13 @@ export default function App() {
         setSelectedCharacters(randomizeArray(characters).slice(0, newCardCount));
     }
 
+    function goBackToMenu() {
+        // Reset scores when going back to menu
+        setBestScore(0);
+        setCurrentScore(0);
+        setMenuDisplay(true);
+    }
+
     if (menuDisplay) {
         return (
             <div className="menu">
@@ -126,12 +133,7 @@ export default function App() {
                     >
                         Play Again
                     </div>
-                    <div
-                        className="action"
-                        onClick={() => {
-                            setMenuDisplay(true);
-                        }}
-                    >
+                    <div className="action" onClick={goBackToMenu}>
                         Back to Menu
                     </div>
                 </div>
@@ -142,17 +144,12 @@ export default function App() {
     // Render cards
     return (
         <>
-            <div
-                onClick={() => {
-                    setMenuDisplay(true);
-                }}
-                className="back-to-menu"
-            >
+            <div onClick={goBackToMenu} className="back-to-menu">
                 Memory Game
             </div>
             <div className="play-area">
                 {gameNotification}
-                <Scoreboard currentScore={currentScore} bestScore={bestScore}/>
+                <Scoreboard currentScore={currentScore} bestScore={bestScore} />
                 <div className="deck">
                     {selectedCharacters.map((character) => {
                         return (
