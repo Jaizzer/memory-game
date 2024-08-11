@@ -93,6 +93,7 @@ export default function App() {
                     </div>
                     <div
                         onClick={() => {
+                            document.querySelector('#hitSound').play();
                             startGame(15);
                         }}
                         className="difficulty-option"
