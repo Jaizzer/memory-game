@@ -150,7 +150,6 @@ export default function App() {
                     {selectedCharacters.map((character) => {
                         return (
                             <Card
-                                name={character.name}
                                 key={character.id}
                                 imageLink={character.image}
                                 onClickFunction={() => {
