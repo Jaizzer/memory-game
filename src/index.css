@@ -5,9 +5,10 @@
 }
 
 .card {
-    border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
 .difficulty-selection {
